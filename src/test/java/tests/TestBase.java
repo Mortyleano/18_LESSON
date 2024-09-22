@@ -7,7 +7,6 @@ import io.qameta.allure.selenide.AllureSelenide;
 import io.restassured.RestAssured;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import utils.Attachments;
 
@@ -27,18 +26,13 @@ public class TestBase {
         Configuration.browserSize = System.getProperty("windowSize", "1920x1080");
         Configuration.pageLoadStrategy = "eager";
 
+        SelenideLogger.addListener("allure", new AllureSelenide());
         DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setCapability("selenoid:options", Map.<String, Object>of(
                 "enableVNC", true,
                 "enableVideo", true
         ));
         Configuration.browserCapabilities = capabilities;
-    }
-
-    @BeforeEach
-    @Step("Устанавливаем доп.конфигурации перед запуском теста")
-    void setUpBeforeEach() {
-        SelenideLogger.addListener("allure", new AllureSelenide());
     }
 
     @AfterEach
