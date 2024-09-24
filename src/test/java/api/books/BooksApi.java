@@ -1,6 +1,6 @@
 package api.books;
 
-import api.authtorization.AuthorizationApi;
+import helpers.WebDriverCookieManager;
 import io.qameta.allure.Step;
 import models.BookModel;
 import models.IsbnDataModel;
@@ -15,8 +15,8 @@ public class BooksApi {
 
     private final static String DEFAULT_ISBN_ID = "9781449325862";
     private final static String API_PATH_BOOKS = "/BookStore/v1/Books";
-    private final static String TOKEN = AuthorizationApi.extactValueFromCookieString("token");
-    private final static String USER_ID = AuthorizationApi.extactValueFromCookieString("userID");
+    private final static String TOKEN = WebDriverCookieManager.extactValueFromCookieString("token");
+    private final static String USER_ID = WebDriverCookieManager.extactValueFromCookieString("userID");
 
     @Step("Добавляем книгу в коллекцию")
     public void addBookToCollections() {

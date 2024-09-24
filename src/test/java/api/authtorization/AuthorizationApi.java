@@ -1,12 +1,11 @@
 package api.authtorization;
 
-import com.codeborne.selenide.WebDriverRunner;
-import models.AuthorizationModel;
 import io.restassured.response.Response;
+import models.AuthorizationModel;
 
+import static io.restassured.RestAssured.given;
 import static specs.AuthorizationUserSpec.authorizationRequestSpec;
 import static specs.AuthorizationUserSpec.authorizationResponseSpec;
-import static io.restassured.RestAssured.given;
 
 
 public class AuthorizationApi {
@@ -25,10 +24,5 @@ public class AuthorizationApi {
                 .then()
                 .spec(authorizationResponseSpec)
                 .extract().response();
-    }
-
-    public static String extactValueFromCookieString(String value) {
-        String cookieValue = String.valueOf(WebDriverRunner.getWebDriver().manage().getCookieNamed(value));
-        return cookieValue.substring(cookieValue.indexOf("=") + 1, cookieValue.indexOf(";"));
     }
 }
